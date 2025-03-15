@@ -1,0 +1,60 @@
+Exploring on Scala REPL:
+
+Currying:
+scala> def mult(x: Double, y: Double): Double = x * y
+def mult(x: Double, y: Double): Double
+
+scala> def curriedMult(x: Double)(y: Double): Double = x * y
+def curriedMult(x: Double)(y: Double): Double
+
+scala> val a = mult(3, 4)
+val a: Double = 12.0
+
+scala> val b = curriedMult((3))(4)
+val b: Double = 12.0
+
+scala> def div(x: Double, y: Double): Double = x/y
+def div(x: Double, y: Double): Double
+
+scala> val c = div(9, 3)
+val c: Double = 3.0
+
+scala> def curriedDiv(x: Double)(y: Double): Double = x/y
+def curriedDiv(x: Double)(y: Double): Double
+
+scala> val d = curriedDiv(9)(3)
+val d: Double = 3.0
+
+scala> val div2 = curriedDiv(2)
+val div2: Double => Double = Lambda/0x000001de904e0e38@6071631f
+
+scala> div2(4)
+val res0: Double = 0.5
+
+Case Match:
+scala> val v = 7
+
+ val res = v match
+   case n if n > 0 => "pos"
+   case 0 => "zero"
+   case _ => "neg"
+val res: String = zero
+val v: Int = 7
+
+scala> println(res)
+pos
+val res: String = pos
+
+ProductTypes:
+scala> val x = u02.ProductTypes.Point2D(1, 2)
+val x: u02.ProductTypes.Point2D = Point2D(1.0,2.0)
+
+scala> val y = u02.ProductTypes.rotate(x)
+Point2D(10.0,20.0)
+Point2D(20.0,-10.0)
+Point2D(13.0,24.0)
+10.0
+Point2D(11.0,20.0)
+val y: u02.ProductTypes.Point2D = Point2D(2.0,-1.0)
+
+
