@@ -43,3 +43,11 @@ class Lab2Test:
 
   @Test def task7() =
    assertEquals(8 , Lab2.power(2, 3))
+   
+  @Test def task8() =
+    assertEquals(4321,  Lab2.reverseNumber(1234))
+    
+  @Test def task9() =
+    val expr1: Lab2.Expr = Lab2.Expr.Add(Lab2.Expr.Literal(3), Lab2.Expr.Multiply(Lab2.Expr.Literal(4), Lab2.Expr.Literal(5))) // 3 + (4 * 5)
+    assertEquals(23, Lab2.Expr.evaluate(expr1))
+    assertEquals("3+4*5", Lab2.Expr.show(expr1))

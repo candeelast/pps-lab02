@@ -1,5 +1,6 @@
 package u02
 
+import u02.Lab2.Expr.{Add, Literal, Multiply, evaluate, show}
 import u02.Lab2.neg
 
 object Lab2 extends App {
@@ -71,11 +72,27 @@ object Lab2 extends App {
       case _ => actual2.toInt
     res
 
-  def manolo(n: Int): Int =
+  def reverseNumber(n: Int): Int =
     auxiliaryReverse(n%10, n/10)
 
- println(manolo(1234))
+//9
+enum Expr {
+  case Literal(lit: Int)
+  case Add(exp1: Expr, exp2: Expr)
+  case Multiply(exp1: Expr, exp2: Expr)
+}
+
+  object Expr:
+
+    def evaluate(expr: Expr): Int = expr match
+      case Literal(value) => value
+      case Add(left, right) => evaluate(left) + evaluate(right)
+      case Multiply(left, right) => evaluate(left) * evaluate(right)
 
 
-
-      }
+    def show(expr: Expr): String = expr match
+      case Literal(value) => value.toString
+      case Add(left, right) => show(left) + "+" + show(right)
+      case Multiply(left, right) => show(left) + "*" + show(right)
+  
+}
