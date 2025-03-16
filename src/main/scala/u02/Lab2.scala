@@ -7,15 +7,13 @@ object Lab2 extends App {
   println("Hello, Scala!")
 
   //Task 2
-  //a (ii)
+  //a
   def positive(x: Int): String =
     val res = x match
       case n if n >= 0 => "positive"
       case _ => "negative"
     res
 
-
-  //a (i)
   val positive2: Int => String = _ match
     case n if n >= 0 => "positive"
     case _ => "negative"
@@ -27,13 +25,57 @@ object Lab2 extends App {
   val neg2: (String => Boolean) => (String => Boolean) =
     g => (a => !g(a))
   
-
   //c
   def genericNeg[A](pred: A => Boolean): (A => Boolean) =
     x => !pred(x)
 
   val genericNeg2: [B] => (B => Boolean) => (B => Boolean) =
-    [B] => (a: B => Boolean) => (b: B) => !a(b)
-    
-  
-}
+    [B] => (a: B => Boolean) => ((b: B) => !a(b))
+
+//4
+    //val & currying
+  val p1: Int => (Int, Int) => Boolean = x => (y, z) => x <= y && y == z
+    //val & no currying
+  val p2: (Int, Int, Int) => Boolean = (x, y ,z) => x <= y && y == z
+
+    //def & currying
+  def p3(x: Int)(y: Int)(z: Int): Boolean = x <= y && y == z
+    //def & no currying
+  def p4(x: Int, y: Int, z:Int): Boolean = x <= y && y == z
+
+
+//5
+  def compose(f: Int => Int, g: Int => Int): (Int => Int) =
+    x => f(g(x))
+  //Constraint: the domain of g and codomain of f must be equal
+  def genericCompose[A, B, C](f: B => C, g: A => B) : (A => C) =
+  x => f(g(x))
+
+//6
+  def composeThree[A,B,C,D](f: C => D, g: B => C, h: A => B): A => D =
+    x => f(g(h(x)))
+
+
+//7
+  def power(n: Int, e: Int): Int =
+   e match
+    case 1 => n
+    case 0 => 1
+    case _ => n*power(n, e-1)
+
+//8
+  def auxiliaryReverse(actual: Int, remains: Int): Int =
+    val actual2 = actual.toString + (remains % 10).toString
+    val res = remains match
+      case n if n > 10 => auxiliaryReverse(actual2.toInt, remains / 10)
+      case _ => actual2.toInt
+    res
+
+  def manolo(n: Int): Int =
+    auxiliaryReverse(n%10, n/10)
+
+ println(manolo(1234))
+
+
+
+      }
